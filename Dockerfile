@@ -1,4 +1,5 @@
-FROM alpine:3.16
+FROM python:3.10-alpine
+# FROM alpine:3.16
 
 RUN apk add --update coreutils && rm -rf /var/cache/apk/*
 
