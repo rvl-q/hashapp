@@ -1,7 +1,7 @@
 # FROM python:3.10-alpine
 # # FROM alpine:3.16
 
-# EXPOSE 7777
+# EXPOSE 80
 
 # RUN apk add --update coreutils && rm -rf /var/cache/apk/*
 
@@ -33,4 +33,6 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY ./app /code/app
 
 # 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7777"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+# EXPOSE 80
+# CMD ["uvicorn", "app.main:app", "--port", "80"]
