@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: hasher
-          image: rvlq/hasher:1.07
+          image: rvlq/hasher:latest
