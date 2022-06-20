@@ -2,7 +2,8 @@
 
 . ./hasher.sh
 
-# echo $HASH
+echo $HASH > app/files/hs.txt
+
 
 # echo starting...
 
@@ -19,13 +20,15 @@
 
 # trap 'other_commands' INT
 
-# while true; do
-#   #TS=`date -u --rfc-3339=ns`
-#   TS=`date -u -Ins`
-#   #TS=`date -u -R`
-#   echo $TS $HASH
-#   sleep 4.995;
-# done
+# echo foo > app/files/bar
 
-# ctrl-c does not reach uvicorn in this setup
-uvicorn app.main:app --host 0.0.0.0 --port 7777
+# (not "auto tuned", will inevitably drift..)
+while true; do
+  #TS=`date -u --rfc-3339=ns`
+  TS=`date -u -Ins`
+  #TS=`date -u -R`
+  echo $TS > app/files/ts.txt
+  sleep 4.995;
+done
+
+# uvicorn app.main:app --host 0.0.0.0 --port 7777

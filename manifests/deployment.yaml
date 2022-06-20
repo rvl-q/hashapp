@@ -1,17 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hasher-dep
+  name: log-output-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hasher
+      app: log-output
   template:
     metadata:
       labels:
-        app: hasher
+        app: log-output
     spec:
+      volumes: # Define volume
+        - name: shared-image
+          emptyDir: {}
       containers:
         - name: hasher
           image: rvlq/hasher:latest
+          volumeMounts: # Mount volume
+          - name: shared-image
+            mountPath: /code/app/files
+        - name: log-output
+          image: rvlq/log-output:latest
+          volumeMounts: # Mount volume
+          - name: shared-image
+            mountPath: /code/app/files

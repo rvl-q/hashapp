@@ -1,9 +1,9 @@
 # FROM python:3.10-alpine
-# # FROM alpine:3.16
+FROM alpine:3.16
 
 # EXPOSE 80
 
-# RUN apk add --update coreutils && rm -rf /var/cache/apk/*
+RUN apk add --update coreutils && rm -rf /var/cache/apk/*
 
 # RUN pip install fastapi
 
@@ -18,20 +18,20 @@
 # # CMD ["sh", "hasher.sh"]
 
 # 
-FROM python:3.9
+# FROM python:3.9
 
 # 
 WORKDIR /code
 
 # 
-COPY ./requirements.txt /code/requirements.txt
+# COPY ./requirements.txt /code/requirements.txt
 
 # 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+# RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # 
-COPY ./app /code/app
-COPY ./code /code
+# COPY ./app /code/app
+COPY . /code
 
 # WORKDIR /code/app
 # 
