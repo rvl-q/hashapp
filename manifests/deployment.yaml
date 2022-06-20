@@ -17,12 +17,12 @@ spec:
           emptyDir: {}
       containers:
         - name: hasher
-          image: rvlq/hasher@sha256:eda8cf26a88492209596be67ddb0f7a7c41c3169ed1518e7d02a2146d34d8fe2
+          image: rvlq/hasher:1.10
           volumeMounts: # Mount volume
           - name: shared-image
             mountPath: /code/app/files
         - name: log-output
-          image: rvlq/log-output@sha256:a83141ce2ee3e1fdc12fb052e035542b257b55086d761a3e612614f036f1bc36
+          image: rvlq/log-output:1.10
           volumeMounts: # Mount volume
           - name: shared-image
             mountPath: /code/app/files

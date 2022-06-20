@@ -78,15 +78,4 @@ def hello():
     data = f"{ts} {_hash}"
     return Response(content=data, media_type="text/plain")
 
-
-# def loop1():
-#     S5 = dt.timedelta(seconds=5)
-#     target = dt.datetime.now(dt.timezone.utc)+S5
-#     while True:
-#         now = dt.datetime.now(dt.timezone.utc)
-#         print(now, _hash)
-#         time.sleep((target-now).total_seconds()-0.005)
-#         target += S5
-
-
 # print('test When this is printed')
