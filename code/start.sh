@@ -27,7 +27,7 @@ while true; do
   #TS=`date -u --rfc-3339=ns`
   TS=`date -u -Ins`
   #TS=`date -u -R`
-  echo $TS > app/files/ts.txt
+  echo -n $TS > app/files/ts.txt
   sleep 4.995;
 done
 

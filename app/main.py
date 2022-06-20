@@ -57,14 +57,13 @@ async def writer_ready():
 
 def get_latest_ts():
     ts = '0'
-    if (_hash=='HASH'):
-        try:
-            with open('app/files/ts.txt', 'r') as f:
-                ts = f.read()
-        except EnvironmentError:
-            print('Error in opening shared file!')
-            # return os.popen('ls -al app/files').read()
-            return 'Sorry IO Error!'
+    try:
+        with open('app/files/ts.txt', 'r') as f:
+            ts = f.read()
+    except EnvironmentError:
+        print('Error in opening shared file!')
+        # return os.popen('ls -al app/files').read()
+        return 'Sorry IO Error!'
     return ts
 
 @app.on_event("startup")
@@ -75,8 +74,8 @@ async def startup_event():
 
 @app.get("/")
 def hello():
-    hash = hash_check()
-    data = f"{_latest_timestamp} {hash}"
+    ts = get_latest_ts()
+    data = f"{ts} {_hash}"
     return Response(content=data, media_type="text/plain")
 
 
