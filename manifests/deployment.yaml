@@ -23,16 +23,17 @@ spec:
         #   - name: shared-share
         #     mountPath: /code/app/files
         - name: log-output
-          image: rvlq/log-output:1254
+          image: rvlq/log-output:1358
           volumeMounts: # Mount volume
           - name: shared-share
             mountPath: /code/app/shared
-        - name: ping-pong
-          image: rvlq/ping-pong:0950
-          volumeMounts:
-          - name: shared-share
-            mountPath: /app/shared
-          resources:
-              limits:
-                memory: "64Mi"
-                cpu: "100m"
+        # in a separate pod, not here
+        # - name: ping-pong
+        #   image: rvlq/ping-pong:1358
+        #   volumeMounts:
+        #   - name: shared-share
+        #     mountPath: /app/shared
+        #   resources:
+        #       limits:
+        #         memory: "64Mi"
+        #         cpu: "100m"
