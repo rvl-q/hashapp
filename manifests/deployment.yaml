@@ -23,7 +23,7 @@ spec:
         #   - name: shared-share
         #     mountPath: /code/app/files
         - name: log-output
-          image: rvlq/log-output:1358
+          image: rvlq/log-output:1.11
           volumeMounts: # Mount volume
           - name: shared-share
             mountPath: /code/app/shared
