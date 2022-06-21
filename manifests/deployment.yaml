@@ -12,17 +12,18 @@ spec:
       labels:
         app: log-output
     spec:
-      volumes: # Define volume
+      volumes:
         - name: shared-image
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: share-claim
       containers:
-        - name: hasher
-          image: rvlq/hasher:1.10
-          volumeMounts: # Mount volume
-          - name: shared-image
-            mountPath: /code/app/files
+        # - name: hasher
+        #   image: rvlq/hasher:1.10
+        #   volumeMounts: # Mount volume
+        #   - name: shared-share
+        #     mountPath: /code/app/files
         - name: log-output
-          image: rvlq/log-output:1.10
+          image: rvlq/log-output:latest
           volumeMounts: # Mount volume
-          - name: shared-image
-            mountPath: /code/app/files
+          - name: shared-share
+            mountPath: /code/app/shared

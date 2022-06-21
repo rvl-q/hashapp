@@ -74,8 +74,11 @@ async def forever():
 #     return ts
 
 def get_latest():
-    with open('app/shared/pongs.txt', 'r') as f:
-        pongs = int(f.read())
+    try:
+        with open('app/shared/pongs.txt', 'r') as f:
+            pongs = int(f.read())
+    except:
+        return os.popen('ls -al app/shared').read()
     return _latest_timestamp, pongs
 
 @app.on_event("startup")
