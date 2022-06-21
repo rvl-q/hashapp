@@ -13,7 +13,7 @@ spec:
         app: log-output
     spec:
       volumes:
-        - name: shared-image
+        - name: shared-share
           persistentVolumeClaim:
             claimName: share-claim
       containers:
@@ -23,7 +23,16 @@ spec:
         #   - name: shared-share
         #     mountPath: /code/app/files
         - name: log-output
-          image: rvlq/log-output:latest
+          image: rvlq/log-output:1254
           volumeMounts: # Mount volume
           - name: shared-share
             mountPath: /code/app/shared
+        - name: ping-pong
+          image: rvlq/ping-pong:0950
+          volumeMounts:
+          - name: shared-share
+            mountPath: /app/shared
+          resources:
+              limits:
+                memory: "64Mi"
+                cpu: "100m"
