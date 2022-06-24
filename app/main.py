@@ -3,7 +3,7 @@ from typing import Union
 import os, datetime as dt
 from fastapi import Depends, FastAPI, Response, Form, Body
 
-import asyncio, hashlib
+import asyncio, hashlib, urllib
 
 app = FastAPI()
 
@@ -30,26 +30,13 @@ async def forever():
         _latest_timestamp = dt.datetime.now(dt.timezone.utc)
 
         # the Log output, disabled for now as we have other ways to see (the latest).
-        # print(f'{_latest_timestamp} {_hash}', flush=True)
+        # re-enabled, use: kubectl logs <podname> to read
+        print(f'{_latest_timestamp} {_hash}', flush=True)
 
-        # await asyncio.sleep(5)
         # don't let it slip
         await asyncio.sleep((target - _latest_timestamp).total_seconds() - MAGIC_CONSTANT)
         target += T5S
 
-# async def writer_ready():
-#     # kludge
-#     time.sleep(1)
-#     ready = False
-#     while (not ready):
-#         global _hash
-#         try:
-#             with open('app/files/hs.txt', 'r') as f:
-#                 _hash = f.read()
-#                 ready = True
-#         except EnvironmentError:
-#             print('Error in opening shared file!')
-#             time.sleep(5)
 
 # def hash_check():
 #     global _hash
@@ -73,12 +60,21 @@ async def forever():
 #         return 'Sorry IO Error!'
 #     return ts
 
+# def get_latest():
+#     try:
+#         with open('app/shared/pongs.txt', 'r') as f:
+#             pongs = int(f.read())
+#     except:
+#         return os.popen('ls -al app/shared').read()
+#     return _latest_timestamp, pongs
+
 def get_latest():
+    pongs = 0
     try:
         with open('app/shared/pongs.txt', 'r') as f:
             pongs = int(f.read())
     except:
-        return os.popen('ls -al app/shared').read()
+        print('Error reading in', os.popen('ls -al app/shared').read())
     return _latest_timestamp, pongs
 
 @app.on_event("startup")
