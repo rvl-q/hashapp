@@ -12,13 +12,13 @@ spec:
       labels:
         app: log-output
     spec:
-      volumes:
-        - name: shared-share
-          persistentVolumeClaim:
-            claimName: share-claim
+      # volumes:
+      #   - name: shared-share
+      #     persistentVolumeClaim:
+      #       claimName: share-claim
       containers:
         - name: log-output
-          image: rvlq/log-output:20830
+          image: rvlq/log-output:20839
           # volumeMounts: # Mount volume
           # - name: shared-share
           #   mountPath: /code/app/shared

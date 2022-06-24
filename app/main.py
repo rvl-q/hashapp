@@ -3,7 +3,9 @@ from typing import Union
 import os, datetime as dt
 from fastapi import Depends, FastAPI, Response, Form, Body
 
-import asyncio, hashlib, urllib
+import asyncio, hashlib, urllib.request
+
+PING_PONG_SVC_URL = "http://ping-pong-svc:1234/pongs"
 
 app = FastAPI()
 
@@ -38,28 +40,6 @@ async def forever():
         target += T5S
 
 
-# def hash_check():
-#     global _hash
-#     if (_hash=='HASH'):
-#         try:
-#             with open('app/files/hs.txt', 'r') as f:
-#                 _hash = f.read()
-#         except EnvironmentError:
-#             print('Error in opening shared file!')
-#             return os.popen('ls -al app/files').read()
-#     return _hash
-
-# def get_latest_ts():
-#     ts = '0'
-#     try:
-#         with open('app/files/ts.txt', 'r') as f:
-#             ts = f.read()
-#     except EnvironmentError:
-#         print('Error in opening shared file!')
-#         # return os.popen('ls -al app/files').read()
-#         return 'Sorry IO Error!'
-#     return ts
-
 # def get_latest():
 #     try:
 #         with open('app/shared/pongs.txt', 'r') as f:
@@ -71,16 +51,19 @@ async def forever():
 def get_latest():
     pongs = 0
     try:
-        with open('app/shared/pongs.txt', 'r') as f:
-            pongs = int(f.read())
-    except:
-        print('Error reading in', os.popen('ls -al app/shared').read())
+        f = urllib.request.urlopen(PING_PONG_SVC_URL)
+        dec = f.read()
+        dec = dec.decode("utf-8")
+        # print(dec)
+        dec = int(dec)
+        pongs = dec
+    except Exception as e:
+        print('Error in reading URL\n', e)
     return _latest_timestamp, pongs
 
 @app.on_event("startup")
 async def startup_event():
     asyncio.create_task(forever()) # start generating the timestamps
-    # await writer_ready()
 
 
 @app.get("/")
@@ -88,5 +71,3 @@ def hello():
     ts, png = get_latest()
     data = f"{ts} {_hash}.\nPing / Pongs: {png}"
     return Response(content=data, media_type="text/plain")
-
-# print('test When this is printed')
