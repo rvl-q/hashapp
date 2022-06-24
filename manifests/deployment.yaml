@@ -18,7 +18,7 @@ spec:
       #       claimName: share-claim
       containers:
         - name: log-output
-          image: rvlq/log-output:20839
+          image: rvlq/log-output:20840
           # volumeMounts: # Mount volume
           # - name: shared-share
           #   mountPath: /code/app/shared
