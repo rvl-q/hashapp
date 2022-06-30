@@ -5,7 +5,8 @@ metadata:
   namespace: exercises
 spec:
   rules:
-  - http:
+  - host: log.localhost
+    http:
       paths:
       # - path: /pingpong
       #   pathType: Prefix
@@ -16,7 +17,6 @@ spec:
       #         number: 1234              
       - path: /
         pathType: Prefix
-        host: log.localhost
         backend:
           service:
             name: log-output-svc
