@@ -5,6 +5,7 @@ from fastapi import Depends, FastAPI, Response, Form, Body
 
 import asyncio, hashlib, urllib.request
 
+# PING_PONG_SVC_URL = "http://ping-pong-svc.exercises:1234/pongs"
 PING_PONG_SVC_URL = "http://ping-pong-svc:1234/pongs"
 
 app = FastAPI()

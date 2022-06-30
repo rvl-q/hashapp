@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: log-output-dep
+  namespace: exercises
 spec:
   replicas: 1
   selector:
@@ -18,7 +19,7 @@ spec:
       #       claimName: share-claim
       containers:
         - name: log-output
-          image: rvlq/log-output:2.01
+          image: rvlq/log-output:latest
           # volumeMounts: # Mount volume
           # - name: shared-share
           #   mountPath: /code/app/shared
