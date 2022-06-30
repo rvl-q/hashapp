@@ -13,16 +13,9 @@ spec:
       labels:
         app: log-output
     spec:
-      # volumes:
-      #   - name: shared-share
-      #     persistentVolumeClaim:
-      #       claimName: share-claim
       containers:
         - name: log-output
           image: rvlq/log-output:latest
-          # volumeMounts: # Mount volume
-          # - name: shared-share
-          #   mountPath: /code/app/shared
           resources:
             limits:
               memory: "512Mi"

@@ -8,13 +8,6 @@ spec:
   - host: log.localhost
     http:
       paths:
-      # - path: /pingpong
-      #   pathType: Prefix
-      #   backend:
-      #     service:
-      #       name: ping-pong-svc
-      #       port:
-      #         number: 1234              
       - path: /
         pathType: Prefix
         backend:
