@@ -69,6 +69,7 @@ async def startup_event():
 
 @app.get("/")
 def hello():
+    hello = os.getenv('MESSAGE', default='Message is NOT set!')
     ts, png = get_latest()
-    data = f"{ts} {_hash}.\nPing / Pongs: {png}"
+    data = f"{hello}\n{ts} {_hash}.\nPing / Pongs: {png}"
     return Response(content=data, media_type="text/plain")
