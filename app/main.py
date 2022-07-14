@@ -6,7 +6,11 @@ from fastapi import Depends, FastAPI, Response, Form, Body
 import asyncio, hashlib, urllib.request
 
 # PING_PONG_SVC_URL = "http://ping-pong-svc.exercises:1234/pongs" # not needed
-PING_PONG_SVC_URL = "http://ping-pong-svc:1234/pongs"
+# PING_PONG_SVC_URL = "http://ping-pong-svc:1234/pongs"
+PING_PONG_SVC_URL = os.getenv('PING_PONG_SVC_URL', default='http://ping-pong-svc:80/pongs')
+
+PING_TIMEOUT = 3.0
+last_error = dt.datetime(1970,1,1)
 
 app = FastAPI()
 
@@ -50,16 +54,25 @@ async def forever():
 #     return _latest_timestamp, pongs
 
 def get_latest():
+    global last_error
+    now = dt.datetime.now()
+    delta_t = now-last_error
     pongs = 0
+    if (delta_t.total_seconds() < PING_TIMEOUT):
+        print('recent error in getting pongs')
+        return _latest_timestamp, -1
     try:
-        f = urllib.request.urlopen(PING_PONG_SVC_URL)
-        dec = f.read()
-        dec = dec.decode("utf-8")
-        # print(dec)
-        dec = int(dec)
-        pongs = dec
+        with urllib.request.urlopen(PING_PONG_SVC_URL) as f:
+            dec = f.read()
+            dec = dec.decode("utf-8")
+            # print(dec)
+            dec = int(dec)
+            pongs = dec
     except Exception as e:
-        print('Error in reading URL\n', e)
+        last_error = now
+        print('Error in reading ping URL', now, '\n', e)
+
+    print('time and pongs:', _latest_timestamp, pongs)
     return _latest_timestamp, pongs
 
 @app.on_event("startup")
