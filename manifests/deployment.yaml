@@ -28,3 +28,9 @@ spec:
                 configMapKeyRef:
                   name: log-pong # The ConfigMap this value comes from.
                   key: message # The key to fetch.
+            - name: PING_PONG_SVC_URL # Notice that the case is different here
+                            # from the key name in the ConfigMap.
+              valueFrom:
+                configMapKeyRef:
+                  name: log-pong # The ConfigMap this value comes from.
+                  key: ping-svc-url # The key to fetch.
