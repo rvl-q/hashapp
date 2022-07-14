@@ -62,7 +62,7 @@ def get_latest():
         print('recent error in getting pongs')
         return _latest_timestamp, -1
     try:
-        with urllib.request.urlopen(PING_PONG_SVC_URL) as f:
+        with urllib.request.urlopen(PING_PONG_SVC_URL, timeout = 1) as f:
             dec = f.read()
             dec = dec.decode("utf-8")
             # print(dec)
