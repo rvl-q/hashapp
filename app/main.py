@@ -71,6 +71,7 @@ def get_latest():
     except Exception as e:
         last_error = now
         print('Error in reading ping URL', now, '\n', e)
+        return _latest_timestamp, -1
 
     print('time and pongs:', _latest_timestamp, pongs)
     return _latest_timestamp, pongs
