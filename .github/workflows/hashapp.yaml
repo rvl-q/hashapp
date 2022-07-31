@@ -54,8 +54,8 @@ jobs:
     # Commit and push
     - uses: EndBug/add-and-commit@v7
       with:
-        #add: 'manifests/kustomization.yaml'
-        add: 'manifests/deployment.yaml'
+        add: 'manifests/kustomization.yaml'
+        # add: 'manifests/deployment.yaml'
         message: New version release for log-output ${{ github.sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.HUBGIT_TOKEN }}
