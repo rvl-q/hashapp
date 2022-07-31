@@ -7,6 +7,7 @@ import asyncio, hashlib, urllib.request
 
 # PING_PONG_SVC_URL = "http://ping-pong-svc.exercises:1234/pongs" # not needed
 # PING_PONG_SVC_URL = "http://ping-pong-svc:1234/pongs"
+
 PING_PONG_SVC_URL = os.getenv('PING_PONG_SVC_URL', default='http://ping-pong-svc:80/pongs')
 
 PING_TIMEOUT = 3.0
