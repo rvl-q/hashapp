@@ -5,4 +5,4 @@ resources:
 images:
 - name: IMAGE_PLACEHOLDER
   newName: rvlq/log-output
-  newTag: 3127eff2917cbf47777036866c9f49d4d87dbc26
+  newTag: 96f1e1c11ad220030ad9946bc05a6baf598a1ac2
