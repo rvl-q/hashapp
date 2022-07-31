@@ -93,6 +93,8 @@ def hello():
 def health():
     ts, png = get_latest()
     if (png<0):
+        print('500')
         raise HTTPException(status_code=500, detail="Ping not found")
     else:
+        print('200')
         return Response(content='OK', media_type="text/plain")
