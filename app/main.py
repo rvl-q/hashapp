@@ -1,7 +1,7 @@
 import time
 from typing import Union
 import os, datetime as dt
-from fastapi import Depends, FastAPI, Response, Form, Body
+from fastapi import Depends, FastAPI, Response, Form, Body, HTTPException
 
 import asyncio, hashlib, urllib.request
 
@@ -87,3 +87,11 @@ def hello():
     ts, png = get_latest()
     data = f"{hello}\n{ts} {_hash}.\nPing / Pongs: {png}"
     return Response(content=data, media_type="text/plain")
+
+@app.get("/healtz")
+def health():
+    ts, png = get_latest()
+    if (png<0):
+        raise HTTPException(status_code=500, detail="Ping not found")
+    else:
+        return Response(content='OK', media_type="text/plain")
